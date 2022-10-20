@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,7 +9,7 @@ from bookings.models import Booking, BookingUser
 from workspaces.models import Room
 
 
-class BookingView(APIView):
+class BookingAPIView(APIView):
     class InputSerializer(serializers.Serializer):
         room = serializers.IntegerField()
         date_in = serializers.DateField(format='iso-8601')
@@ -23,8 +22,8 @@ class BookingView(APIView):
         data = serializer.validated_data
         room = get_object_or_404(Room, pk=data.get('room'))
         user = get_user_model().objects.get(id=data.get('user'))
-        requested_date_in = request.data['date_in']
-        requested_date_out = request.data['date_out']
+        requested_date_in = data['date_in']
+        requested_date_out = data['date_out']
         room_bookings = Booking.objects.filter(
             room_id=room,
             date_in__lte=requested_date_in,
@@ -40,10 +39,6 @@ class BookingView(APIView):
         )
         return Response({'booking_id': booking.id}, status=status.HTTP_201_CREATED)
 
-
-# вяртаць па юзеру дзе ён быў (в'юха)
-
-# наладзіць юзера
 
 
 

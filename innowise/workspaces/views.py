@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
@@ -10,7 +9,7 @@ from workspaces.serializers import RoomSerializer
 from bookings.models import Booking
 
 
-class RoomsView(ListAPIView):
+class RoomsAPIView(ListAPIView):
     serializer_class = RoomSerializer
 
     def get_queryset(self):
@@ -18,7 +17,7 @@ class RoomsView(ListAPIView):
         return qs
 
 
-class EmptyRoomView(APIView):
+class EmptyRoomAPIView(APIView):
     class QueryParamsSerializer(serializers.Serializer):
         workspace = serializers.IntegerField()
         date = serializers.DateField(format='iso-8601')

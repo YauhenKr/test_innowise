@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import *
+from workspaces.views import RoomsAPIView, EmptyRoomAPIView
 
 urlpatterns = [
-    path('', RoomsView.as_view(), name='list-of-rooms'),
-    path('empty_room/', EmptyRoomView.as_view(), name='list-of-empty-rooms'),
+    path('', RoomsAPIView.as_view(), name='list-of-rooms'),
+    path('empty_room/', EmptyRoomAPIView.as_view(), name='list-of-empty-rooms'),
 ]

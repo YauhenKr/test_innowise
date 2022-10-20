@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import *
+from users.views import UserBookingsHistoryAPIView
 
 urlpatterns = [
-    path('', UserWhereaboutsView.as_view(), name='list-of-users')
+    path('', UserBookingsHistoryAPIView.as_view(), name='list-of-users')
 ]
